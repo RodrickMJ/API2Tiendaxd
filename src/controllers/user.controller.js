@@ -29,11 +29,11 @@ export const createUser = async (req, res) => {
 
 export const getUsers = async (req, res) => {
     try {
-        const ROLE = await Role.findOne({ name: "Socio" });
+        // Buscar todos los usuarios en la base de datos
+        const users = await User.find().populate('roles');
 
-        const usersWithRoles = await User.find({ roles: ROLE }).populate('roles');
-
-        const formattedUsers = usersWithRoles.map(user => ({
+        // Formatear los usuarios encontrados
+        const formattedUsers = users.map(user => ({
             username: user.username,
             email: user.email,
             telefono: user.telefono,
@@ -43,6 +43,7 @@ export const getUsers = async (req, res) => {
             roles: user.roles.map(role => role.name)
         }));
 
+        // Devolver la lista de usuarios formateados en la respuesta
         return res.status(200).json(formattedUsers);
 
     } catch (error) {
@@ -50,6 +51,7 @@ export const getUsers = async (req, res) => {
         return res.status(500).json({ message: "Error fetching users" });
     }
 };
+
 
 export const updateUser = async (req, res) => {
     try {

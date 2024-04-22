@@ -64,7 +64,6 @@ export const addAdmin = async (req, res) => {
 };
 
 
-
 export const signIn = async (req, res) => { 
     try {
         const { email, username, password } = req.body;
@@ -80,6 +79,7 @@ export const signIn = async (req, res) => {
         const userWithRoles = await User.findById(userFound._id).populate('roles');
 
         const dateUser = {
+            _id: userWithRoles._id, // Añadir la ID aquí
             username: userWithRoles.username,
             email: userWithRoles.email,
             telefono: userWithRoles.telefono,
@@ -95,3 +95,4 @@ export const signIn = async (req, res) => {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 };  
+
