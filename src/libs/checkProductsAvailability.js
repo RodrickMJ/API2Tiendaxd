@@ -10,8 +10,8 @@ export async function checkProductsAvailability(id) {
     for (const idPedido of id) {
         try {
             const pedido = await Orders.findOne({ _id: idPedido }, { buyerData: 0, _id: 0, status: 0, date: 0 })
-                .populate('products.idProduct', 'amount').lean();
-                console.log(pedido.products);
+                .populate('products.idProduct', 'cantidad').lean();
+               
             if (!pedido) {
                 errorsSearchId.push(`Pedido con ID ${idPedido} no encontrado`);
                 continue;
@@ -20,7 +20,9 @@ export async function checkProductsAvailability(id) {
             let allProductsAvailable = true;
 
             for (const product of pedido.products) {
-                if (product.quantity > product.idProduct.amount) {
+
+                if (product.quantity > product.idProduct.cantidad) {
+                   
                     allProductsAvailable = false;
                     break;
                 } 
@@ -30,7 +32,7 @@ export async function checkProductsAvailability(id) {
                 //sacar las id de los productos
                 for (let j = 0; j < pedido.products.length; j++) {
                     idProducts.push({idProduct: pedido.products[j].idProduct._id, 
-                                    amount: pedido.products[j].quantity,
+                                    cantidad: pedido.products[j].quantity,
                                     total: pedido.products[j].total_price});     
                 }
                 

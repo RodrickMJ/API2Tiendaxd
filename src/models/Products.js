@@ -36,6 +36,7 @@ const ProductSchema = new Schema({
     categoria: {
         type: String,
         required: true
+        
     },
     tamaño: {
         type: String,
@@ -48,7 +49,13 @@ const ProductSchema = new Schema({
     genero: {
         type: String,
         required: true
-    }
+    }, 
+    
+    cantidad: {
+        type: Number,
+        required: true
+    },
+
 }, {
     versionKey: false // sirve para que las ID no tengan "_"
 });

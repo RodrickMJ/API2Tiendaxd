@@ -7,7 +7,6 @@ const router = Router();
 
  router.get('/', [authjwt.verifyToken,
                  authLimiter.getsLimit,
-                 authjwt.isAdmin
                  ], ordersCtrl.getOrders);
                
 

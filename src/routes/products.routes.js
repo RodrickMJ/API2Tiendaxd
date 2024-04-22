@@ -28,11 +28,13 @@ router.delete("/:productId", [
     authjwt.isAdmin
 ], ProductsCtrl.deleteProductById);
 
-router.patch("/:productId", [
+router.patch("/:productId", [   
     authjwt.verifyToken,
     authLimiter.patchLimit,
     authjwt.isAdmin
 ], ProductsCtrl.patchAmountProduct);
 
+
+router.post("/category", [authLimiter.getsLimit], ProductsCtrl.filterCategory);
+
 export default router;
- 

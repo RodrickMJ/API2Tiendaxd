@@ -5,7 +5,8 @@ const ordersSchema = new Schema({
     buyerData: {
         name: {type: String, required: true},
         email: {type: String, required: true},
-        phone: {type: Number, required: true}
+        phone: {type: Number, required: true},
+        direccion: {type: String, required: true}
 
     },
 
@@ -23,8 +24,8 @@ const ordersSchema = new Schema({
 
     status: {
         type: String,
-        enum: ["Pendiente", "En espera", "Completado", "Cancelado"],
-        default: "Pendiente"
+        enum: [ "En espera", "Completado", "Cancelado"],
+        default: "En espera"
     
     },
 

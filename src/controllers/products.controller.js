@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 
 export const createProduct = async (req, res) => {
     try {
+
         const newProduct = new Product(req.body);
         const productSave = await newProduct.save();
         return res.status(201).json(productSave);
@@ -92,12 +93,12 @@ export const patchAmountProduct = async (req, res) => {
             return res.status(400).json({ message: "Invalid product ID" });
         }
 
-        const { amount } = req.body;
+        const { cantidad } = req.body;
 
-        if (!amount) {
-            return res.status(400).json({ message: "Amount is required" });
+        if (!cantidad) {
+            return res.status(400).json({ message: "cantidad is required" });
         }
-        if (amount <= 0) {
+        if (cantidad <= 0) {
             return res.status(400).json({ message: "Only positive quantities are allowed" });
         }
 
@@ -107,7 +108,7 @@ export const patchAmountProduct = async (req, res) => {
             return res.status(404).json({ message: "Product not found" });
         }
         
-        product.amount += amount;
+        product.cantidad += cantidad;
         await product.save();
 
         return res.status(200).json({ message: "Product quantity updated successfully", product });
@@ -116,3 +117,20 @@ export const patchAmountProduct = async (req, res) => {
         return res.status(500).json({ message: "Server error" });
     }
 }
+
+
+export const filterCategory = async (req, res) => {
+    try {
+        const { categoria } = req.body;
+
+        const productos = await Product.find({ categoria: categoria });
+        if (!productos || productos.length ===0) return res.status(200).json({message: "No hay productos disponibles"});
+
+        return res.status(200).json(productos);
+    } catch (error) {
+
+        console.error('Error al filtrar productos por categoría:', error);
+       return res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
+

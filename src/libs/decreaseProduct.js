@@ -10,22 +10,16 @@ export async function decreaseProductQuantities(idProducts) {
                 throw new Error(`Producto con ID ${product.idProduct} no encontrado`);
             }
 
-            dbProduct.amount -= product.amount;
+            dbProduct.cantidad -= product.cantidad;
+
             await dbProduct.save();
         }
 
-        await generateSales(idProducts);
+    
         return { success: true, message: "Documentos creados exitosamente" };
     } catch (error) {
-        throw new Error(`Error al decrementar los productos: ${error.message}`);
+        throw new Error(`Error al decrementar los productos: ${error}`);
     }
 }
 
-async function generateSales(data) {
-    try {
-        await Sales.insertMany(data);
-    } catch (error) {
-        throw new Error(`Error al crear los documentos del reporte: ${error.message}`);
-    }
-}
 

@@ -1,9 +1,9 @@
 import rateLimit from "express-rate-limit";
 
 export const Login = rateLimit({
-  windowMs: 5 * 60 * 1000,
+  windowMs: 7 * 60 * 1000,
   max: 3,
-  message: "Demasiados intentos, inténtalo de nuevo después de 15 minutos",
+  message: "Demasiados intentos, inténtalo de nuevo después de 7 minutos",
 });
 
 
@@ -22,21 +22,21 @@ export const amountLimit = rateLimit ({
 })
 
 export const getsLimit = rateLimit({
-  windowMs: 2 *60 *1000,
-  max:15,
-  message: "Demasiadas peticiones, intentelo de nuevo en 2 minutos"
+  windowMs: 1 *60 *1000,
+  max:40,
+  message: "Demasiadas peticiones, intentelo de nuevo en 1 minutos"
 })
 
 
 export const postLimits = rateLimit({
   windowMs: 2 *60 *1000,
-  max:15,
-  message: "Demasiadas peticiones, intentelo de nuevo en 3 minutos"
+  max:40,
+  message: "Demasiadas peticiones, intentelo de nuevo en 2 minutos"
 })
 
 export const putLimits = rateLimit ({
-  windowMs: 3 *60 *1000,
-  max:10,
+  windowMs: 2 *60 *1000,
+  max:60,
   message: "Demasiadas peticiones, intentelo de nuevo en 2 minutos"
 })
 

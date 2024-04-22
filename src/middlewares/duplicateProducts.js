@@ -2,7 +2,9 @@ import mongoose from 'mongoose';
 import Product from '../models/Products'; // Asegúrate de que estés importando el modelo correcto
 
 export const validateFields = async (req, res, next) => {
-    const requiredFields = ['name', 'img1', 'img2', 'img3', 'img4', 'color', 'descripcion', 'precio', 'categoria', 'tamaño', 'temporada', 'genero'];
+    const requiredFields = ['name', 'img1', 'img2', 'img3', 'img4', 'color', 
+            'descripcion', 'precio', 'categoria', 'tamaño', 'temporada', 'genero', 'cantidad'];
+            
     const errorsMessage = {};
 
     for (const field of requiredFields) {

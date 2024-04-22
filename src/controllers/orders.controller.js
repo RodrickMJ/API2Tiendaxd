@@ -15,7 +15,8 @@ export const createOrders = async (req, res) => {
         return res.status(201).json({ ordersSave });
 
     } catch (error) {
-        return res.status(500).json({ message: "Error the server" });
+
+        return res.status(500).json({ message: error });
     }
 
 }
@@ -63,6 +64,7 @@ export const changeStatusOrders = async (req, res) => {
             await Orders.updateMany({ _id: { $in: waitOrders } }, { $set: { status: "En espera" } });
 
             // descontar los productos adquiridos: 
+    
             await decreaseProductQuantities(idProducts);
 
             return res.status(201).json({ completeOrders, waitOrders});

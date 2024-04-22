@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 export const verifyFields = async (req, res, next) => {
     try {
         
-        const { name, email, phone } = req.body.buyerData;
+        const { name, email, phone, direccion } = req.body.buyerData;
 
-        if (!name || !email || !phone) {
+        if (!name || !email || !phone || !direccion) {
             return res.status(400).json({ message: "Error, the buyer's data is incomplete" });
         }
 
